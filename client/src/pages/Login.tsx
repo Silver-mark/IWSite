@@ -42,71 +42,7 @@ const Login = () => {
   const onSubmit = async (formData: LoginFormValues) => {
     setIsLoading(true);
     try {
-      // Check for admin credentials
-      if (formData.username === "Admin" && formData.password === "PasswordAdmin") {
-        // Special handling for admin login
-        const response = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-        
-        if (!response.ok) {
-          // If admin doesn't exist in the database yet, create it
-          const createAdminResponse = await fetch("/api/signup", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username: "Admin",
-              email: "admin@pcbuilderguide.com",
-              password: "PasswordAdmin",
-              confirmPassword: "PasswordAdmin",
-              firstName: "Admin",
-              lastName: "User"
-            }),
-          });
-          
-          if (!createAdminResponse.ok) {
-            const error = await createAdminResponse.json();
-            throw new Error(error.message || "Failed to create admin account");
-          }
-          
-          // Now try logging in again
-          const loginResponse = await fetch("/api/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-          
-          if (!loginResponse.ok) {
-            const error = await loginResponse.json();
-            throw new Error(error.message || "Admin login failed");
-          }
-          
-          const responseData = await loginResponse.json();
-          localStorage.setItem("authToken", responseData.token);
-        } else {
-          const responseData = await response.json();
-          localStorage.setItem("authToken", responseData.token);
-        }
-        
-        toast({
-          title: "Admin Access Granted",
-          description: "Logged in as administrator",
-        });
-        
-        // Redirect to admin page
-        window.location.href = "/admin";
-        return;
-      }
-      
-      // Regular user login flow
+      // Universal login flow - server handles admin special case
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
@@ -125,13 +61,16 @@ const Login = () => {
       // Store token in localStorage
       localStorage.setItem("authToken", responseData.token);
       
+      // Check if this is an admin login
+      const isAdmin = responseData.user && responseData.user.username === "Admin";
+      
       toast({
-        title: "Success",
-        description: "Logged in successfully",
+        title: isAdmin ? "Admin Access Granted" : "Success",
+        description: isAdmin ? "Logged in as administrator" : "Logged in successfully",
       });
 
-      // Redirect regular users to home
-      window.location.href = "/";
+      // Redirect admin to admin page, regular users to home
+      window.location.href = isAdmin ? "/admin" : "/";
     } catch (error) {
       console.error("Login error:", error);
       toast({
