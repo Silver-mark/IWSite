@@ -162,7 +162,7 @@ const AddOns = () => {
             
             <div className="md:w-1/2">
               <img 
-                src={image} 
+                src="https://images.unsplash.com/photo-1592919505780-303954a3a247?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                 alt="Additional computer components and add-ons" 
                 className="rounded-xl shadow-lg mb-6 w-full" 
               />

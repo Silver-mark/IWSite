@@ -166,7 +166,7 @@ const Storage = () => {
             
             <div className="md:w-1/2">
               <img 
-                src={image} 
+                src="https://images.unsplash.com/photo-1597225244660-1cd102bf3d3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                 alt="Computer storage devices including SSD and HDD" 
                 className="rounded-xl shadow-lg mb-6 w-full" 
               />

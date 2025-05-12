@@ -154,7 +154,7 @@ const PowerSupply = () => {
             
             <div className="md:w-1/2">
               <img 
-                src={image} 
+                src="https://images.unsplash.com/photo-1600348712270-5a9564ad5878?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                 alt="Computer power supply unit" 
                 className="rounded-xl shadow-lg mb-6 w-full" 
               />
