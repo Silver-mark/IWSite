@@ -21,16 +21,16 @@ const Profile = () => {
         method: "POST",
       });
 
-      if (!response.ok) {
-        throw new Error("Logout failed");
-      }
+      // Remove token from localStorage
+      localStorage.removeItem("authToken");
 
       toast({
         title: "Success",
         description: "Logged out successfully",
       });
 
-      setLocation("/");
+      // Redirect and force page reload to clear auth state
+      window.location.href = "/";
     } catch (error) {
       console.error("Logout error:", error);
       toast({

@@ -16,7 +16,7 @@ import { eq } from "drizzle-orm";
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  createUser(user: CreateUser): Promise<User>;
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
   getContactMessages(): Promise<ContactMessage[]>;
 }
@@ -32,10 +32,15 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async createUser(insertUser: any): Promise<User> {
+  async createUser(userData: CreateUser): Promise<User> {
     const [user] = await db
       .insert(users)
-      .values(insertUser)
+      .values({
+        ...userData,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        profileImageUrl: null
+      })
       .returning();
     return user;
   }
@@ -43,7 +48,10 @@ export class DatabaseStorage implements IStorage {
   async createContactMessage(message: InsertContactMessage): Promise<ContactMessage> {
     const [contactMessage] = await db
       .insert(contactMessages)
-      .values(message)
+      .values({
+        ...message,
+        createdAt: new Date()
+      })
       .returning();
     return contactMessage;
   }

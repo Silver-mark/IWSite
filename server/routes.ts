@@ -4,7 +4,8 @@ import { storage } from "./storage";
 import { 
   insertContactMessageSchema, 
   insertUserSchema, 
-  loginUserSchema 
+  loginUserSchema,
+  createUserSchema
 } from "@shared/schema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -50,14 +51,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const salt = await bcrypt.genSalt(10);
       const passwordHash = await bcrypt.hash(userData.password, salt);
       
-      // Create user
-      const user = await storage.createUser({
+      // Create user with the correct schema
+      const createUserData = createUserSchema.parse({
         username: userData.username,
         email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        passwordHash,
+        firstName: userData.firstName || null,
+        lastName: userData.lastName || null,
+        passwordHash
       });
+      
+      const user = await storage.createUser(createUserData);
       
       res.status(201).json({ 
         message: "User registered successfully",

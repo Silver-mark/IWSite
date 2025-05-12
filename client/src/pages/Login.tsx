@@ -37,7 +37,7 @@ const Login = () => {
     },
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
+  const onSubmit = async (formData: LoginFormValues) => {
     setIsLoading(true);
     try {
       const response = await fetch("/api/login", {
@@ -45,7 +45,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
@@ -53,12 +53,18 @@ const Login = () => {
         throw new Error(error.message || "Login failed");
       }
 
+      const responseData = await response.json();
+      
+      // Store token in localStorage
+      localStorage.setItem("authToken", responseData.token);
+      
       toast({
         title: "Success",
         description: "Logged in successfully",
       });
 
-      setLocation("/");
+      // Refresh query client to fetch user data
+      window.location.href = "/";
     } catch (error) {
       console.error("Login error:", error);
       toast({
