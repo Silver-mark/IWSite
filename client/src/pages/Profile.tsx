@@ -67,54 +67,55 @@ const Profile = () => {
 
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-2xl">
-          <Card className="w-full">
+          <Card className="w-full bg-white">
             <CardHeader className="flex flex-col items-center">
               <Avatar className="h-24 w-24 mb-4">
                 {user.profileImageUrl ? (
                   <AvatarImage src={user.profileImageUrl} alt={user.username} />
                 ) : (
-                  <AvatarFallback>
+                  <AvatarFallback className="bg-primary text-white">
                     <UserIcon className="h-12 w-12" />
                   </AvatarFallback>
                 )}
               </Avatar>
-              <CardTitle className="text-2xl font-bold text-center">User Profile</CardTitle>
-              <CardDescription className="text-center">
+              <CardTitle className="text-2xl font-bold text-center text-neutral-900">User Profile</CardTitle>
+              <CardDescription className="text-center text-neutral-600">
                 Manage your account and PC build preferences
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h3 className="text-sm font-medium text-muted-foreground">Username</h3>
-                  <p className="text-lg">{user.username}</p>
+                  <h3 className="text-sm font-medium text-neutral-600">Username</h3>
+                  <p className="text-lg text-neutral-900">{user.username}</p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-muted-foreground">Email</h3>
-                  <p className="text-lg">{user.email}</p>
+                  <h3 className="text-sm font-medium text-neutral-600">Email</h3>
+                  <p className="text-lg text-neutral-900">{user.email}</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h3 className="text-sm font-medium text-muted-foreground">First Name</h3>
-                  <p className="text-lg">{user.firstName || "-"}</p>
+                  <h3 className="text-sm font-medium text-neutral-600">First Name</h3>
+                  <p className="text-lg text-neutral-900">{user.firstName || "-"}</p>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-muted-foreground">Last Name</h3>
-                  <p className="text-lg">{user.lastName || "-"}</p>
+                  <h3 className="text-sm font-medium text-neutral-600">Last Name</h3>
+                  <p className="text-lg text-neutral-900">{user.lastName || "-"}</p>
                 </div>
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant="outline" disabled={isLogoutLoading}>
+              <Button variant="outline" className="text-neutral-800 border-neutral-300" disabled={isLogoutLoading}>
                 Edit Profile
               </Button>
               <Button 
                 variant="destructive" 
                 onClick={handleLogout} 
+                className="bg-red-600 text-white hover:bg-red-700"
                 disabled={isLogoutLoading}
               >
                 {isLogoutLoading ? "Logging out..." : "Log Out"}

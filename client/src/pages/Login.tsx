@@ -86,10 +86,10 @@ const Login = () => {
 
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-md">
-          <Card className="w-full">
+          <Card className="w-full bg-white">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold text-center">Log In</CardTitle>
-              <CardDescription className="text-center">
+              <CardTitle className="text-2xl font-bold text-center text-neutral-900">Log In</CardTitle>
+              <CardDescription className="text-center text-neutral-600">
                 Sign in to your account to track your PC build
               </CardDescription>
             </CardHeader>
@@ -101,11 +101,11 @@ const Login = () => {
                     name="username"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Username</FormLabel>
+                        <FormLabel className="text-neutral-800">Username</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your username" {...field} />
+                          <Input placeholder="Enter your username" className="bg-white text-neutral-900" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-600" />
                       </FormItem>
                     )}
                   />
@@ -115,23 +115,23 @@ const Login = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel className="text-neutral-800">Password</FormLabel>
                         <FormControl>
-                          <Input type="password" placeholder="••••••••" {...field} />
+                          <Input type="password" placeholder="••••••••" className="bg-white text-neutral-900" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-600" />
                       </FormItem>
                     )}
                   />
 
-                  <Button type="submit" className="w-full" disabled={isLoading}>
+                  <Button type="submit" className="w-full bg-primary text-white" disabled={isLoading}>
                     {isLoading ? "Logging in..." : "Log In"}
                   </Button>
                 </form>
               </Form>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <div className="text-center text-sm">
+              <div className="text-center text-sm text-neutral-700">
                 Don't have an account?{" "}
                 <Link href="/signup" className="text-primary font-medium hover:underline">
                   Sign Up

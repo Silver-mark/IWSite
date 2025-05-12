@@ -91,10 +91,10 @@ const Signup = () => {
 
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-md">
-          <Card className="w-full">
+          <Card className="w-full bg-white">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold text-center">Create an Account</CardTitle>
-              <CardDescription className="text-center">
+              <CardTitle className="text-2xl font-bold text-center text-neutral-900">Create an Account</CardTitle>
+              <CardDescription className="text-center text-neutral-600">
                 Sign up to save your PC builds and get personalized recommendations
               </CardDescription>
             </CardHeader>
@@ -107,11 +107,11 @@ const Signup = () => {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Name</FormLabel>
+                          <FormLabel className="text-neutral-800">First Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="First name" {...field} />
+                            <Input placeholder="First name" className="bg-white text-neutral-900" {...field} />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-600" />
                         </FormItem>
                       )}
                     />
@@ -121,11 +121,11 @@ const Signup = () => {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last Name</FormLabel>
+                          <FormLabel className="text-neutral-800">Last Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Last name" {...field} />
+                            <Input placeholder="Last name" className="bg-white text-neutral-900" {...field} />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-600" />
                         </FormItem>
                       )}
                     />
@@ -136,11 +136,11 @@ const Signup = () => {
                     name="username"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Username</FormLabel>
+                        <FormLabel className="text-neutral-800">Username</FormLabel>
                         <FormControl>
-                          <Input placeholder="Choose a username" {...field} />
+                          <Input placeholder="Choose a username" className="bg-white text-neutral-900" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-600" />
                       </FormItem>
                     )}
                   />
@@ -150,11 +150,11 @@ const Signup = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-neutral-800">Email</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="your.email@example.com" {...field} />
+                          <Input type="email" placeholder="your.email@example.com" className="bg-white text-neutral-900" {...field} />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-600" />
                       </FormItem>
                     )}
                   />
@@ -165,11 +165,11 @@ const Signup = () => {
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel className="text-neutral-800">Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="••••••••" {...field} />
+                            <Input type="password" placeholder="••••••••" className="bg-white text-neutral-900" {...field} />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-600" />
                         </FormItem>
                       )}
                     />
@@ -179,24 +179,24 @@ const Signup = () => {
                       name="confirmPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Confirm Password</FormLabel>
+                          <FormLabel className="text-neutral-800">Confirm Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="••••••••" {...field} />
+                            <Input type="password" placeholder="••••••••" className="bg-white text-neutral-900" {...field} />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-600" />
                         </FormItem>
                       )}
                     />
                   </div>
 
-                  <Button type="submit" className="w-full mt-6" disabled={isLoading}>
+                  <Button type="submit" className="w-full mt-6 bg-primary text-white" disabled={isLoading}>
                     {isLoading ? "Creating account..." : "Sign Up"}
                   </Button>
                 </form>
               </Form>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
-              <div className="text-center text-sm">
+              <div className="text-center text-sm text-neutral-700">
                 Already have an account?{" "}
                 <Link href="/login" className="text-primary font-medium hover:underline">
                   Log In
