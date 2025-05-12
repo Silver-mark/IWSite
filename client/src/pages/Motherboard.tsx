@@ -113,7 +113,7 @@ const Motherboard = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="md:w-1/2">
-              <div className="sticky top-24">ram
+              <div className="sticky top-24">
                 <h2 className="text-3xl font-bold text-neutral-dark mb-6">{title}</h2>
                 <p className="text-lg mb-6">{description}</p>
                 
