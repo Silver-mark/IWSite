@@ -1,11 +1,160 @@
-import type { Express, Request, Response } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactMessageSchema } from "@shared/schema";
+import { 
+  insertContactMessageSchema, 
+  insertUserSchema, 
+  loginUserSchema 
+} from "@shared/schema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import crypto from "crypto";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+// JWT Secret
+const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+
+// Authentication middleware
+function authenticateToken(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err: any, user: any) => {
+    if (err) {
+      return res.status(403).json({ message: "Token is invalid or expired" });
+    }
+    
+    (req as any).user = user;
+    next();
+  });
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // User registration endpoint
+  app.post("/api/signup", async (req: Request, res: Response) => {
+    try {
+      const userData = insertUserSchema.parse(req.body);
+      
+      // Check if username already exists
+      const existingUser = await storage.getUserByUsername(userData.username);
+      if (existingUser) {
+        return res.status(400).json({ message: "Username already exists" });
+      }
+      
+      // Hash password
+      const salt = await bcrypt.genSalt(10);
+      const passwordHash = await bcrypt.hash(userData.password, salt);
+      
+      // Create user
+      const user = await storage.createUser({
+        username: userData.username,
+        email: userData.email,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        passwordHash,
+      });
+      
+      res.status(201).json({ 
+        message: "User registered successfully",
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+        } 
+      });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const validationError = fromZodError(error);
+        res.status(400).json({ message: validationError.message });
+      } else {
+        console.error("Registration error:", error);
+        res.status(500).json({ message: "Failed to register user" });
+      }
+    }
+  });
+
+  // User login endpoint
+  app.post("/api/login", async (req: Request, res: Response) => {
+    try {
+      const loginData = loginUserSchema.parse(req.body);
+      
+      // Find user by username
+      const user = await storage.getUserByUsername(loginData.username);
+      if (!user) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      
+      // Verify password
+      const validPassword = await bcrypt.compare(loginData.password, user.passwordHash);
+      if (!validPassword) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      
+      // Generate JWT token
+      const token = jwt.sign(
+        { id: user.id, username: user.username },
+        JWT_SECRET,
+        { expiresIn: "24h" }
+      );
+      
+      res.status(200).json({
+        message: "Login successful",
+        token,
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          profileImageUrl: user.profileImageUrl,
+        }
+      });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const validationError = fromZodError(error);
+        res.status(400).json({ message: validationError.message });
+      } else {
+        console.error("Login error:", error);
+        res.status(500).json({ message: "Failed to login" });
+      }
+    }
+  });
+
+  // Get current user endpoint
+  app.get("/api/auth/user", authenticateToken, async (req: Request, res: Response) => {
+    try {
+      const userId = (req as any).user.id;
+      const user = await storage.getUser(userId);
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Return user without sensitive data
+      res.status(200).json({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        profileImageUrl: user.profileImageUrl,
+      });
+    } catch (error) {
+      console.error("Get user error:", error);
+      res.status(500).json({ message: "Failed to get user data" });
+    }
+  });
+
+  // Logout endpoint
+  app.post("/api/logout", (req: Request, res: Response) => {
+    // Client-side logout (JWT tokens are stateless)
+    res.status(200).json({ message: "Logged out successfully" });
+  });
   // Contact form submission endpoint
   app.post("/api/contact", async (req: Request, res: Response) => {
     try {

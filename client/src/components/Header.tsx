@@ -4,12 +4,16 @@ import {
   LaptopIcon, 
   ChevronDownIcon, 
   MenuIcon, 
-  XIcon 
+  XIcon,
+  UserIcon
 } from "lucide-react";
+import { useAuth } from "../hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   const isActive = (path: string) => {
     return location === path ? "text-primary" : "text-neutral-dark hover:text-primary";
@@ -96,6 +100,24 @@ const Header = () => {
             <Link href="/contact" className={`font-medium ${isActive("/contact")}`}>
               Contact
             </Link>
+
+            {isLoading ? (
+              <div className="w-24 h-8 bg-gray-200 animate-pulse rounded"></div>
+            ) : isAuthenticated ? (
+              <Link href="/profile">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <UserIcon size={16} />
+                  Profile
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <UserIcon size={16} />
+                  Log In
+                </Button>
+              </Link>
+            )}
           </nav>
           
           {/* Mobile menu button */}
@@ -159,6 +181,18 @@ const Header = () => {
             <Link href="/contact" className="block py-2 text-neutral-dark">
               Contact
             </Link>
+
+            {isLoading ? (
+              <div className="w-full h-8 bg-gray-200 animate-pulse rounded my-2"></div>
+            ) : isAuthenticated ? (
+              <Link href="/profile" className="block py-2 text-primary font-medium">
+                My Profile
+              </Link>
+            ) : (
+              <Link href="/login" className="block py-2 text-primary font-medium">
+                Log In
+              </Link>
+            )}
           </div>
         )}
       </div>

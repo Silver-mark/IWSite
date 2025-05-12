@@ -47,6 +47,15 @@ export const insertUserSchema = createInsertSchema(users).omit({
   path: ["confirmPassword"],
 });
 
+// Schema for database insertion (with passwordHash)
+export const createUserSchema = z.object({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  firstName: z.string().nullable().optional(),
+  lastName: z.string().nullable().optional(),
+  passwordHash: z.string(),
+});
+
 export const loginUserSchema = z.object({
   username: z.string().min(1, "Username is required"),
   password: z.string().min(1, "Password is required"),
@@ -64,6 +73,7 @@ export const insertSessionSchema = createInsertSchema(sessions).omit({
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
+export type CreateUser = z.infer<typeof createUserSchema>;
 export type User = typeof users.$inferSelect;
 export type LoginUser = z.infer<typeof loginUserSchema>;
 

@@ -53,12 +53,14 @@ function AppRouter() {
 
 function App() {
   return (
-    <Router>
-      <TooltipProvider>
-        <Toaster />
-        <AppRouter />
-      </TooltipProvider>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <TooltipProvider>
+          <Toaster />
+          <AppRouter />
+        </TooltipProvider>
+      </Router>
+    </QueryClientProvider>
   );
 }
 
