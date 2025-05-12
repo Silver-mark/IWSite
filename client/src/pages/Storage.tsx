@@ -114,8 +114,8 @@ const Storage = () => {
           <div className="flex flex-col md:flex-row gap-8">
             <div className="md:w-1/2">
               <div className="sticky top-24">
-                <h2 className="text-3xl font-bold text-neutral-dark mb-6">{title}</h2>
-                <p className="text-lg mb-6">{description}</p>
+                <h2 className="text-3xl font-bold card-title mb-6">{title}</h2>
+                <p className="text-lg card-text mb-6">{description}</p>
                 
                 <div className="bg-white rounded-xl p-6 shadow-md mb-6">
                   <h3 className="font-semibold text-xl mb-4 flex items-center">

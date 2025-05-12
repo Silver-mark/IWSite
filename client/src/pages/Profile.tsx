@@ -109,7 +109,11 @@ const Profile = () => {
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button variant="outline" className="text-neutral-800 border-neutral-300" disabled={isLogoutLoading}>
+              <Button 
+                variant="outline" 
+                className="bg-primary text-white border-primary hover:bg-primary/90 hover:text-white" 
+                disabled={isLogoutLoading}
+              >
                 Edit Profile
               </Button>
               <Button 
