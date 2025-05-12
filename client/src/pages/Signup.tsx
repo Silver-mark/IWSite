@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 const signupSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),
@@ -33,6 +34,8 @@ type SignupFormValues = z.infer<typeof signupSchema>;
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { toast } = useToast();
   const [_, setLocation] = useLocation();
 
@@ -167,7 +170,26 @@ const Signup = () => {
                         <FormItem>
                           <FormLabel className="text-neutral-800">Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="••••••••" className="bg-white text-neutral-900" {...field} />
+                            <div className="relative">
+                              <Input 
+                                type={showPassword ? "text" : "password"} 
+                                placeholder="••••••••" 
+                                className="bg-white text-neutral-900 pr-10" 
+                                {...field} 
+                              />
+                              <button
+                                type="button"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                                onClick={() => setShowPassword(!showPassword)}
+                                tabIndex={-1}
+                              >
+                                {showPassword ? (
+                                  <EyeOffIcon className="h-5 w-5" />
+                                ) : (
+                                  <EyeIcon className="h-5 w-5" />
+                                )}
+                              </button>
+                            </div>
                           </FormControl>
                           <FormMessage className="text-red-600" />
                         </FormItem>
@@ -181,7 +203,26 @@ const Signup = () => {
                         <FormItem>
                           <FormLabel className="text-neutral-800">Confirm Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="••••••••" className="bg-white text-neutral-900" {...field} />
+                            <div className="relative">
+                              <Input 
+                                type={showConfirmPassword ? "text" : "password"} 
+                                placeholder="••••••••" 
+                                className="bg-white text-neutral-900 pr-10" 
+                                {...field} 
+                              />
+                              <button
+                                type="button"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                tabIndex={-1}
+                              >
+                                {showConfirmPassword ? (
+                                  <EyeOffIcon className="h-5 w-5" />
+                                ) : (
+                                  <EyeIcon className="h-5 w-5" />
+                                )}
+                              </button>
+                            </div>
                           </FormControl>
                           <FormMessage className="text-red-600" />
                         </FormItem>

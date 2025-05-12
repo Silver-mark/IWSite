@@ -27,6 +27,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
   const [_, setLocation] = useLocation();
 
@@ -183,7 +184,26 @@ const Login = () => {
                       <FormItem>
                         <FormLabel className="text-neutral-800">Password</FormLabel>
                         <FormControl>
-                          <Input type="password" placeholder="••••••••" className="bg-white text-neutral-900" {...field} />
+                          <div className="relative">
+                            <Input 
+                              type={showPassword ? "text" : "password"} 
+                              placeholder="••••••••" 
+                              className="bg-white text-neutral-900 pr-10" 
+                              {...field} 
+                            />
+                            <button
+                              type="button"
+                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                              onClick={() => setShowPassword(!showPassword)}
+                              tabIndex={-1}
+                            >
+                              {showPassword ? (
+                                <EyeOffIcon className="h-5 w-5" />
+                              ) : (
+                                <EyeIcon className="h-5 w-5" />
+                              )}
+                            </button>
+                          </div>
                         </FormControl>
                         <FormMessage className="text-red-600" />
                       </FormItem>

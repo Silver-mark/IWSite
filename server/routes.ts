@@ -92,17 +92,63 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // User login endpoint
   app.post("/api/login", async (req: Request, res: Response) => {
     try {
+      console.log("Login attempt:", req.body.username);
       const loginData = loginUserSchema.parse(req.body);
+      
+      // Special handling for Admin user
+      if (loginData.username === "Admin" && loginData.password === "PasswordAdmin") {
+        console.log("Admin login attempt with correct credentials");
+        
+        // Find or create Admin user
+        let user = await storage.getUserByUsername("Admin");
+        if (!user) {
+          console.log("Admin user not found, creating admin account");
+          // Create Admin account
+          const salt = await bcrypt.genSalt(10);
+          const passwordHash = await bcrypt.hash("PasswordAdmin", salt);
+          
+          user = await storage.createUser({
+            username: "Admin",
+            email: "admin@pcbuilderguide.com",
+            firstName: "Admin",
+            lastName: "User",
+            passwordHash
+          });
+          console.log("Admin account created:", user.id);
+        }
+        
+        // Generate JWT token for admin
+        const token = jwt.sign(
+          { id: user.id, username: user.username },
+          JWT_SECRET,
+          { expiresIn: "24h" }
+        );
+        
+        console.log("Admin login successful");
+        return res.status(200).json({
+          message: "Admin login successful",
+          token,
+          user: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName
+          }
+        });
+      }
       
       // Find user by username
       const user = await storage.getUserByUsername(loginData.username);
       if (!user) {
+        console.log("User not found:", loginData.username);
         return res.status(401).json({ message: "Invalid username or password" });
       }
       
       // Verify password
       const validPassword = await bcrypt.compare(loginData.password, user.passwordHash);
       if (!validPassword) {
+        console.log("Invalid password for user:", loginData.username);
         return res.status(401).json({ message: "Invalid username or password" });
       }
       
@@ -193,14 +239,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get contact messages endpoint (for admin purposes)
   app.get("/api/contact-messages", authenticateToken, async (req: Request, res: Response) => {
     try {
+      // Log request for debugging
+      console.log("Contact messages request from user:", req.user);
+      
       // Check if the user is an admin
       if (!req.user || req.user.username !== "Admin") {
+        console.log("Access denied, not admin:", req.user?.username);
         return res.status(403).json({ message: "Access denied. Admin privileges required." });
       }
       
       const messages = await storage.getContactMessages();
+      console.log("Fetched contact messages:", messages.length);
       res.status(200).json(messages);
     } catch (error) {
+      console.error("Error fetching contact messages:", error);
       res.status(500).json({ message: "Failed to retrieve contact messages" });
     }
   });
