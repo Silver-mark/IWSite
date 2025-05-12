@@ -117,36 +117,36 @@ const Storage = () => {
                 <h2 className="text-3xl font-bold card-title mb-6">{title}</h2>
                 <p className="text-lg card-text mb-6">{description}</p>
                 
-                <div className="bg-white rounded-xl p-6 shadow-md mb-6">
-                  <h3 className="font-semibold text-xl mb-4 flex items-center">
-                    <DiscIcon className="mr-2 text-secondary" size={18} />
+                <div className="card-content rounded-xl p-6 shadow-md mb-6">
+                  <h3 className="font-semibold text-xl mb-4 flex items-center card-title">
+                    <DiscIcon className="mr-2 text-primary" size={18} />
                     Storage Form Factors
                   </h3>
                   <div className="space-y-3">
                     {formFactors.map((factor, index) => (
                       <div key={index} className="border-b pb-3 last:border-0 last:pb-0">
-                        <h4 className="font-semibold text-secondary">{factor.factor}</h4>
-                        <p className="text-sm">{factor.description}</p>
-                        <p className="text-sm italic text-neutral-dark/80 mt-1">{factor.types}</p>
+                        <h4 className="font-semibold text-primary">{factor.factor}</h4>
+                        <p className="text-sm card-text">{factor.description}</p>
+                        <p className="text-sm italic card-subtitle mt-1">{factor.types}</p>
                       </div>
                     ))}
                   </div>
                 </div>
                 
-                <div className="bg-white rounded-xl p-6 shadow-md mb-6">
-                  <h3 className="font-semibold text-xl mb-4 flex items-center">
-                    <BarChart3Icon className="mr-2 text-secondary" size={18} />
+                <div className="card-content rounded-xl p-6 shadow-md mb-6">
+                  <h3 className="font-semibold text-xl mb-4 flex items-center card-title">
+                    <BarChart3Icon className="mr-2 text-primary" size={18} />
                     Capacity Recommendations
                   </h3>
                   <div className="space-y-3">
                     {capacityGuide.map((guide, index) => (
                       <div key={index} className="border-b pb-3 last:border-0 last:pb-0">
-                        <h4 className="font-semibold">{guide.storage_type}</h4>
+                        <h4 className="font-semibold text-primary">{guide.storage_type}</h4>
                         <div className="flex flex-col sm:flex-row sm:justify-between text-sm">
-                          <span><span className="font-medium">Min:</span> {guide.minimum}</span>
-                          <span><span className="font-medium">Recommended:</span> {guide.recommended}</span>
+                          <span className="card-text"><span className="font-medium text-primary">Min:</span> {guide.minimum}</span>
+                          <span className="card-text"><span className="font-medium text-primary">Recommended:</span> {guide.recommended}</span>
                         </div>
-                        <p className="text-sm italic text-neutral-dark/80 mt-1">{guide.notes}</p>
+                        <p className="text-sm italic card-subtitle mt-1">{guide.notes}</p>
                       </div>
                     ))}
                   </div>
