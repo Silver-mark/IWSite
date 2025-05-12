@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import NavigationButton from "@/components/NavigationButton";
 import { componentData } from "@/lib/componentData";
+import PowerSupplyImage from "../assets/images/power-supply.svg";
 
 const PowerSupply = () => {
   const { title, description, image } = componentData.powerSupply;
@@ -154,7 +155,7 @@ const PowerSupply = () => {
             
             <div className="md:w-1/2">
               <img 
-                src="https://placekitten.com/800/401" 
+                src={PowerSupplyImage} 
                 alt="Computer power supply unit" 
                 className="rounded-xl shadow-lg mb-6 w-full" 
               />

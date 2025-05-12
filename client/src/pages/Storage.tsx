@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import NavigationButton from "@/components/NavigationButton";
 import { componentData } from "@/lib/componentData";
+import StorageImage from "../assets/images/storage.svg";
 
 const Storage = () => {
   const { title, description, image } = componentData.storage;
@@ -166,7 +167,7 @@ const Storage = () => {
             
             <div className="md:w-1/2">
               <img 
-                src="https://placekitten.com/800/400" 
+                src={StorageImage} 
                 alt="Computer storage devices including SSD and HDD" 
                 className="rounded-xl shadow-lg mb-6 w-full" 
               />

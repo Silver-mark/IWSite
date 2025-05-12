@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import NavigationButton from "@/components/NavigationButton";
 import { componentData } from "@/lib/componentData";
+import AddOnsImage from "../assets/images/add-ons.svg";
 
 const AddOns = () => {
   const { title, description, image } = componentData.addOns;
@@ -162,7 +163,7 @@ const AddOns = () => {
             
             <div className="md:w-1/2">
               <img 
-                src="https://placekitten.com/800/402" 
+                src={AddOnsImage} 
                 alt="Additional computer components and add-ons" 
                 className="rounded-xl shadow-lg mb-6 w-full" 
               />
