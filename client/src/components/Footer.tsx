@@ -55,52 +55,11 @@ const Footer = () => {
             </div>
             
             <div>
-              <h4 className="text-lg font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                    Build Guides
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                    Compatibility
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                    Troubleshooting
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                    FAQs
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            
-            <div>
               <h4 className="text-lg font-semibold mb-4">Contact</h4>
               <ul className="space-y-2">
                 <li>
                   <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
                     Get Build Advice
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                    Terms of Use
                   </Link>
                 </li>
               </ul>

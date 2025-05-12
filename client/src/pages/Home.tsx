@@ -49,8 +49,6 @@ const Home = () => {
           <BuildOverview />
           
           <div className="max-w-6xl mx-auto mt-16">
-            <h3 className="text-2xl font-semibold mb-6 text-center">The Computer Build Path</h3>
-            
             <ComponentPath />
             
             <div className="mt-8 text-center">
