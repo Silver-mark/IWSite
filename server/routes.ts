@@ -1,4 +1,12 @@
-import type { Express, Request, Response, NextFunction } from "express";
+import type { Express, Request as ExpressRequest, Response, NextFunction } from "express";
+
+// Extended Request type with user property
+interface Request extends ExpressRequest {
+  user?: {
+    id: number;
+    username: string;
+  };
+}
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { 
@@ -30,7 +38,7 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
       return res.status(403).json({ message: "Token is invalid or expired" });
     }
     
-    (req as any).user = user;
+    req.user = user;
     next();
   });
 }
@@ -186,8 +194,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/contact-messages", authenticateToken, async (req: Request, res: Response) => {
     try {
       // Check if the user is an admin
-      const user = req.user as { id: number; username: string };
-      if (!user || user.username !== "Admin") {
+      if (!req.user || req.user.username !== "Admin") {
         return res.status(403).json({ message: "Access denied. Admin privileges required." });
       }
       

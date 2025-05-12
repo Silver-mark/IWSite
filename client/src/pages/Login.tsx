@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -62,6 +63,7 @@ const Login = () => {
               username: "Admin",
               email: "admin@pcbuilderguide.com",
               password: "PasswordAdmin",
+              confirmPassword: "PasswordAdmin",
               firstName: "Admin",
               lastName: "User"
             }),
