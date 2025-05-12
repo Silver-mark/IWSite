@@ -21,6 +21,7 @@ import Contact from "@/pages/Contact";
 import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
 import Profile from "@/pages/Profile";
+import Admin from "@/pages/Admin";
 
 function AppRouter() {
   return (
@@ -43,6 +44,7 @@ function AppRouter() {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/profile" component={Profile} />
+          <Route path="/admin" component={Admin} />
           <Route component={NotFound} />
         </Switch>
       </main>

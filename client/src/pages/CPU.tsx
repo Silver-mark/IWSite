@@ -132,7 +132,7 @@ const CPU = () => {
                   <div className="space-y-3">
                     {cpuTerminology.map((term, index) => (
                       <div key={index} className="border-b pb-3 last:border-0 last:pb-0">
-                        <h4 className="font-semibold text-accent">{term.term}</h4>
+                        <h4 className="font-semibold text-secondary">{term.term}</h4>
                         <p className="text-sm">{term.description}</p>
                       </div>
                     ))}

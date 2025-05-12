@@ -113,7 +113,7 @@ const Motherboard = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="md:w-1/2">
-              <div className="sticky top-24">
+              <div className="sticky top-24">ram
                 <h2 className="text-3xl font-bold text-neutral-dark mb-6">{title}</h2>
                 <p className="text-lg mb-6">{description}</p>
                 
@@ -122,7 +122,7 @@ const Motherboard = () => {
                   <div className="space-y-3">
                     {formFactors.map((form, index) => (
                       <div key={index} className="border-b pb-3 last:border-0 last:pb-0">
-                        <h4 className="font-semibold text-accent">{form.name}</h4>
+                        <h4 className="font-semibold text-secondary">{form.name}</h4>
                         <p className="text-sm font-medium">{form.size}</p>
                         <p className="text-sm">{form.features}</p>
                       </div>
@@ -135,7 +135,7 @@ const Motherboard = () => {
                   <div className="space-y-5">
                     {socketTypes.map((socket, index) => (
                       <div key={index}>
-                        <h4 className="font-semibold text-accent mb-2">{socket.brand} Sockets</h4>
+                        <h4 className="font-semibold text-secondary mb-2">{socket.brand} Sockets</h4>
                         <div className="ml-4">
                           <p className="font-medium text-sm mb-1">Current:</p>
                           <ul className="list-disc text-sm ml-5 mb-2">
