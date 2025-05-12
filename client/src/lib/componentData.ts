@@ -37,7 +37,7 @@ export const componentData: Record<string, ComponentData> = {
     description: "The power supply unit (PSU) converts AC power from the wall outlet to DC power for your components. Selecting the right wattage and efficiency is crucial for system stability.",
     primaryColor: "bg-secondary",
     connections: ["/case", "/motherboard", "/gpu", "/storage"],
-    image: "https://images.unsplash.com/photo-1591489378430-ef2f4f64c312?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+    image: "https://images.unsplash.com/photo-1600348712270-5a9564ad5878?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
   },
   caseFans: {
     title: "Case Fans",
@@ -100,7 +100,7 @@ export const componentData: Record<string, ComponentData> = {
     description: "Storage devices hold your operating system, software, and files. Options include fast SSDs for system drives and larger HDDs for mass storage of files and media.",
     primaryColor: "bg-secondary",
     connections: ["/motherboard", "/power-supply"],
-    image: "https://images.unsplash.com/photo-1531492746076-161ca9bcad52?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+    image: "https://images.unsplash.com/photo-1597225244660-1cd102bf3d3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
   },
   addOns: {
     title: "Additional Components",
@@ -109,6 +109,6 @@ export const componentData: Record<string, ComponentData> = {
     description: "Additional components enhance your PC with specialized functions, such as sound cards, network cards, RGB lighting controllers, and front panel devices.",
     primaryColor: "bg-secondary",
     connections: ["/motherboard"],
-    image: "https://images.unsplash.com/photo-1592664474388-8d4e7e6bfa78?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+    image: "https://images.unsplash.com/photo-1592919505780-303954a3a247?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
   }
 };
