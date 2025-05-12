@@ -86,7 +86,7 @@ const PowerSupply = () => {
         <meta name="description" content={description} />
       </Helmet>
 
-      <section className="py-16 bg-neutral-light">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="md:w-1/2">

@@ -1,6 +1,8 @@
 import { Switch, Route, Router } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 import NotFound from "@/pages/not-found";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,6 +18,9 @@ import GPU from "@/pages/GPU";
 import Storage from "@/pages/Storage";
 import AddOns from "@/pages/AddOns";
 import Contact from "@/pages/Contact";
+import Login from "@/pages/Login";
+import Signup from "@/pages/Signup";
+import Profile from "@/pages/Profile";
 
 function AppRouter() {
   return (
@@ -35,6 +40,9 @@ function AppRouter() {
           <Route path="/storage" component={Storage} />
           <Route path="/add-ons" component={AddOns} />
           <Route path="/contact" component={Contact} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/profile" component={Profile} />
           <Route component={NotFound} />
         </Switch>
       </main>
