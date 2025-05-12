@@ -183,8 +183,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get contact messages endpoint (for admin purposes)
-  app.get("/api/contact-messages", async (req: Request, res: Response) => {
+  app.get("/api/contact-messages", authenticateToken, async (req: Request, res: Response) => {
     try {
+      // Check if the user is an admin
+      const user = req.user as { id: number; username: string };
+      if (!user || user.username !== "Admin") {
+        return res.status(403).json({ message: "Access denied. Admin privileges required." });
+      }
+      
       const messages = await storage.getContactMessages();
       res.status(200).json(messages);
     } catch (error) {
