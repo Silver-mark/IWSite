@@ -20,7 +20,7 @@ const Home = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Build Your Perfect Computer</h1>
             <p className="text-xl mb-8">Step-by-step guide to assembling your custom PC. Learn everything from selecting components to final assembly.</p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="#overview">
+              <Link href="/case">
                 <Button className="bg-white text-primary hover:bg-opacity-90 transition-all font-semibold px-6 py-6 h-auto">
                   Start Learning
                 </Button>
