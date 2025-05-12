@@ -29,7 +29,7 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <LaptopIcon className="text-primary mr-2" size={24} />
-            <Link href="/" className="text-xl font-bold text-primary">
+            <Link href="/" className="text-xl font-bold text-neutral-900">
               PC Builder Guide
             </Link>
           </div>

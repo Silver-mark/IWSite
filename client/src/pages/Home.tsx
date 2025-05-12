@@ -26,7 +26,7 @@ const Home = () => {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-primary transition-all font-semibold px-6 py-6 h-auto">
+                <Button className="bg-primary text-white hover:bg-primary/90 transition-all font-semibold px-6 py-6 h-auto">
                   Get Build Advice
                 </Button>
               </Link>
