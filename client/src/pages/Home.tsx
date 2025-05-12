@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import BuildOverview from "@/components/BuildOverview";
-import ComponentPath from "@/components/ComponentPath";
 
 const Home = () => {
   return (
@@ -49,9 +48,7 @@ const Home = () => {
           <BuildOverview />
           
           <div className="max-w-6xl mx-auto mt-16">
-            <ComponentPath />
-            
-            <div className="mt-8 text-center">
+            <div className="text-center">
               <Link href="/case">
                 <Button className="bg-primary text-white hover:bg-primary/90 transition-all font-semibold px-6 py-3">
                   Start with the Case
